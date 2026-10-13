@@ -1,0 +1,19 @@
+services:
+  mc-dev:
+    image: itzg/minecraft-server:latest
+    container_name: mc-test-server
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.20.4"
+      MEMORY: "2G"
+      ONLINE_MODE: "false"
+      USE_AIKAR_FLAGS: "true"
+    volumes:
+      - ./data:/data
+      - ./plugins:/data/plugins
+    restart: unless-stopped
+    stdin_open: true
+    tty: true

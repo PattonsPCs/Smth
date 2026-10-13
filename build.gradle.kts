@@ -17,3 +17,12 @@ dependencies {
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
+
+tasks.register<Copy>("copyJarToPlugins"){
+    from(tasks.named("jar"))
+    into(layout.projectDirectory.dir("run/plugins"))
+}
+
+tasks.named("build"){
+    finalizedBy("copyJarToPlugins")
+}

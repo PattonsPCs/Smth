@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -18,14 +19,25 @@ public class MobSpawnListener implements Listener {
     public void onMobSpawn(CreatureSpawnEvent event){
         LivingEntity entity = event.getEntity();
 
-        if (entity instanceof Player || !(entity instanceof Monster)){
+        if (entity instanceof Player){
             return;
         }
 
-        int level = 5;
+        if (entity instanceof Creature) {
+            int level = 5 + (int) (Math.random() * 6);
+            applyStats(entity, level);// Random level between 5 and 10
+            updateNameTag(entity, level);
+        } else if (entity instanceof Monster){
+            int level = 15 + (int) (Math.random() * 6);
+            applyStats(entity, level);// Random level between 15 and 20
+            updateNameTag(entity, level);
+        } else {
+            int level = 10 + (int) (Math.random() * 6);
+            applyStats(entity, level);// Random level between 10 and 15
+            updateNameTag(entity, level);
+        }
 
-        applyStats(entity, level);
-        updateNameTag(entity, level);
+
 
     }
 
