@@ -1,0 +1,4 @@
+name: MobStats
+version: "1.0"
+main: myplugin.MobStats
+api-version: "1.20"
